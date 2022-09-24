@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CRUB_Sale.Models.product>
+
+@{
+    ViewBag.Title = "ProductView";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Danh sách các sản phẩm</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb p-0 m-0">
+                    <li class="breadcrumb-item">@Html.ActionLink("Thêm sản phẩm", "Create")</li>
+                    <li class="breadcrumb-item">
+                        @using (Html.BeginForm())
+                        {
+                            <div class=" form-group row">
+                                @Html.TextBox("kw")
+                                <input type="submit" placeholder="Nhập tên sản phẩm cần tìm" class="btn btn-success" />
+                            </div>
+                        }
+                    </li>
+                   
+                </ol>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Tên
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Loại sản phẩm
+        </th>
+
+        <th>
+            Ngày tạo
+        </th>
+        <th>
+            Danh mục
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.manufacturer)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.created_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.name)
+            </td>
+            <td>
+
+                <button style="color: white; text-decoration: none" type="button" class="btn btn-secondary"> @Html.ActionLink("Sửa", "Edit", new { id = item.id })</button>
+                <button style="color: white; text-decoration: none" type="button" class="btn btn-info waves-effect waves-light ">@Html.ActionLink("Chi tiết", "Details", new { id = item.id }) </button>
+                <button style="color: white; text-decoration: none" type="button" class="btn btn-default "> @Html.ActionLink("Xóa", "Delete", new { id = item.id })</button>
+
+
+            </td>
+        </tr>
+    }
+
+</table>
